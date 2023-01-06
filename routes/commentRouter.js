@@ -1,13 +1,15 @@
 const cmtController = require('../controlller/commentController');
-const sessionCtroller= require("../controlller/sessionCtroller");
+const {verifyToken,
+    verifyTokenAndUserAuthorization,
+    verifyTokenAndAdmin}= require("../controlller/sessionCtroller");
 const router= require('express').Router();
 
 
-router.post('/',sessionCtroller.verifyTokenAndAdmin,cmtController.addComment);
-router.get('/', sessionCtroller.verifyToken.cmtController.getAllComents);
-router.get('/:id',sessionCtroller.verifyToken, cmtController.getAComent);
-router.put('/:id',sessionCtroller.verifyTokenAndAdmin, cmtController.updatecmt);
-router.delete('/:id',sessionCtroller.verifyTokenAndAdmin, cmtController.deletecmt);
+router.post('/',verifyTokenAndAdmin,cmtController.addComment);
+router.get('/', verifyToken,cmtController.getAllComents);
+router.get('/:id',verifyToken, cmtController.getAComent);
+router.put('/:id',verifyTokenAndAdmin, cmtController.updatecmt);
+router.delete('/:id',verifyTokenAndAdmin, cmtController.deletecmt);
 
 
 module.exports= router;

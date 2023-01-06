@@ -1,11 +1,13 @@
 const alimentController = require('../controlller/alimentController');
-const sessionCtroller= require("../controlller/sessionCtroller");
+const {verifyToken,
+verifyTokenAndUserAuthorization,
+verifyTokenAndAdmin,}= require("../controlller/sessionCtroller");
 const router = require("express").Router();
-router.post('/',sessionCtroller.verifyTokenAndAdmin, alimentController.addAliment);
-router.get('/',sessionCtroller.verifyToken, alimentController.getAllAliment);
-router.get('/:id', sessionCtroller.verifyToken,alimentController.getAAliment);
-router.put('/:id',sessionCtroller.verifyTokenAndAd,alimentController.updateAliment);
-router.delete('/:id', sessionCtroller.verifyTokenAndAd,alimentController.deleteAliment);
+router.post('/',verifyTokenAndAdmin, alimentController.addAliment);
+router.get('/',verifyToken, alimentController.getAllAliment);
+router.get('/:id', verifyToken,alimentController.getAAliment);
+router.put('/:id',verifyTokenAndAdmin,alimentController.updateAliment);
+router.delete('/:id', verifyTokenAndAdmin,alimentController.deleteAliment);
 
 
 module.exports= router;

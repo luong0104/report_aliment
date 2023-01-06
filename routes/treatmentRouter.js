@@ -1,13 +1,15 @@
 const treatmentController = require('../controlller/treatmentController');
-const sessionCtroller= require("../controlller/sessionCtroller");
+const {verifyToken,
+    verifyTokenAndUserAuthorization,
+    verifyTokenAndAdmin}= require("../controlller/sessionCtroller");
 const router= require('express').Router();
 
 
-router.post('/',sessionCtroller.verifyTokenAndAdmin, treatmentController.addTreatment);
-router.get('/', sessionCtroller.verifyToken,treatmentController.getAllTreatment);
-router.get('/:id',sessionCtroller.verifyToken, treatmentController.getAnTreatment);
-router.put('/:id', sessionCtroller.verifyTokenAndAdmin,treatmentController.updateTreatment);
-router.delete('/:id',sessionCtroller.verifyTokenAndAdmin, treatmentController.deleteTreatment);
+router.post('/',verifyTokenAndAdmin, treatmentController.addTreatment);
+router.get('/', verifyToken,treatmentController.getAllTreatment);
+router.get('/:id',verifyToken, treatmentController.getAnTreatment);
+router.put('/:id', verifyTokenAndAdmin,treatmentController.updateTreatment);
+router.delete('/:id',verifyTokenAndAdmin, treatmentController.deleteTreatment);
 
 
 module.exports= router;

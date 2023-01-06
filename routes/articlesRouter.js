@@ -1,9 +1,11 @@
 const articlesController = require('../controlller/articlesController');
-const sessionCtroller= require("../controlller/sessionCtroller");
+const {verifyToken,
+verifyTokenAndUserAuthorization,
+verifyTokenAndAdmin}= require("../controlller/sessionCtroller");
 const router= require("express").Router();
-router.post('/',sessionCtroller.verifyTokenAndAdmin, articlesController.addArticle);
-router.get('/', sessionCtroller.verifyToken,articlesController.getAllArtiles);
-router.get('/:id',sessionCtroller.verifyToken, articlesController.getAnArticles);
-router.put('/:id', sessionCtroller.verifyTokenAndAdmin,articlesController.updateArticles);
-router.delete('/:id',sessionCtroller.verifyTokenAndAdmin, articlesController.deleteArticles);
+router.post('/',verifyTokenAndAdmin, articlesController.addArticle);
+router.get('/', verifyToken,articlesController.getAllArtiles);
+router.get('/:id',verifyToken, articlesController.getAnArticles);
+router.put('/:id', verifyTokenAndAdmin,articlesController.updateArticles);
+router.delete('/:id',verifyTokenAndAdmin, articlesController.deleteArticles);
 module.exports= router;
